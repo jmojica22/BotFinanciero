@@ -1,16 +1,27 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-    print('prueba')
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    # Fetch the service account key JSON file contents
+    cred = credentials.Certificate('Data/env.json')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # Initialize the app with a service account, granting admin privileges
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': 'https://jmojica-yfqylr.firebaseio.com/'
+    })
+
+    ref = db.reference('server/saving-data/fireblog')
+    users_ref = ref.child('users')
+    users_ref.set({
+        'alanisawesome': {
+            'date_of_birth': 'June 23, 1912',
+            'full_name': 'Alan Turing'
+        },
+        'gracehop': {
+            'date_of_birth': 'December 9, 1906',
+            'full_name': 'Grace Hopper'
+        }
+    })
+

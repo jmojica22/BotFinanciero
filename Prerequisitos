@@ -1,0 +1,4 @@
+pip install firebase-admin
+//si da error instalando se debe agregar pip a la variable del proyecto
+py -m ensurepip --upgrade
+
